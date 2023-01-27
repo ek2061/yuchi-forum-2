@@ -20,7 +20,7 @@ export const BasicPage = ({ title, children }: BasicPageProps) => {
         <meta property="og:description" content="廢文製造機" />
         <meta
           property="og:image"
-          content={`${process.env.BASE_URL}/yuchi-forum-logo.png`}
+          content={`${process.env.NEXT_PUBLIC_BASE_URL}/yuchi-forum-logo.png`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
