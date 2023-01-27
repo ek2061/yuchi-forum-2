@@ -11,8 +11,8 @@ export default function Home() {
         direction="column"
         align="center"
         justifyContent="center"
-        minHeight="100vh"
-        width="100%"
+        minH="100vh"
+        w="full"
         paddingTop={12}
       >
         <div>123</div>

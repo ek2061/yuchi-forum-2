@@ -28,13 +28,7 @@ export const BasicPage = ({ title, children }: BasicPageProps) => {
 
       <main>
         <Header />
-        <Stack
-          direction="row"
-          align="start"
-          justify="center"
-          height="100%"
-          width="100%"
-        >
+        <Stack direction="row" align="start" justify="center" h="full" w="full">
           {children}
         </Stack>
       </main>
