@@ -1,10 +1,17 @@
-import { Box } from "@chakra-ui/react";
+import { PostAbstractType } from "@/types/posts";
+import { Stack } from "@chakra-ui/react";
+import { PostAbstract } from "./PostAbstract";
 
-function CenterSection() {
+interface CenterSectionProps {
+  posts: PostAbstractType[];
+}
+
+function CenterSection({ posts }: CenterSectionProps) {
   return (
-    <Box background="red.100" w="full" h="full" maxW="728px">
-      CenterSection
-    </Box>
+    <Stack spacing={3} w="full" h="full" maxW="728px">
+      {posts &&
+        posts.map((p) => <PostAbstract key={p.pid} {...p} comment={0} />)}
+    </Stack>
   );
 }
 
