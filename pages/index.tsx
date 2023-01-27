@@ -1,4 +1,7 @@
 import { BasicPage } from "@/components/BasicPage";
+import CenterSection from "@/components/CenterSection";
+import LeftSection from "@/components/LeftSection";
+import RightSection from "@/components/RightSection";
 import { Stack } from "@chakra-ui/react";
 import { Inter } from "@next/font/google";
 
@@ -8,14 +11,16 @@ export default function Home() {
   return (
     <BasicPage>
       <Stack
-        direction="column"
-        align="center"
+        direction="row"
+        align="start"
         justifyContent="center"
-        minH="100vh"
         w="full"
-        paddingTop={12}
+        mx="auto"
+        px={3}
       >
-        <div>123</div>
+        <LeftSection />
+        <CenterSection />
+        <RightSection />
       </Stack>
     </BasicPage>
   );

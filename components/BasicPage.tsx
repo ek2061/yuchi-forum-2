@@ -12,7 +12,7 @@ export const BasicPage = ({ title, children }: BasicPageProps) => {
   if (title) pageTitle = `${title} | yuchi forum`;
 
   return (
-    <Box background="gray.100">
+    <Box>
       <Head>
         <title>{pageTitle}</title>
         <meta property="og:site_name" content="yuchi-forum" />
@@ -26,7 +26,7 @@ export const BasicPage = ({ title, children }: BasicPageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="py-6">
         <Header />
         <Stack direction="row" align="start" justify="center" h="full" w="full">
           {children}
