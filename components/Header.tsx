@@ -40,7 +40,8 @@ export const Header = () => {
         <Button
           variant="outline"
           color="white"
-          _hover={{ bg: "gray.600", opacity: 0.8 }}
+          _hover={{ bg: "gray.600" }}
+          _active={{ bg: "blue.600", color: "gray.100" }}
           h={8}
         >
           Login
