@@ -4,16 +4,28 @@ import LeftSection from "@/components/LeftSection";
 import RightSection from "@/components/RightSection";
 import { PostAbstractType } from "@/types/posts";
 import { Stack } from "@chakra-ui/react";
-import { Inter } from "@next/font/google";
-import type { GetServerSideProps } from "next";
+import type { SWRConfiguration } from "swr";
+import useSWR from "swr";
 
-const inter = Inter({ subsets: ["latin"] });
+const fetcher = async () => {
+  const res = await fetch("/api/listPosts");
+  const data: PostAbstractType[] = await res.json();
+  return data;
+};
 
-interface HomeProps {
-  posts: PostAbstractType[];
-}
+const config: SWRConfiguration = {
+  suspense: true,
+  fallbackData: [],
+  revalidateOnMount: true,
+};
 
-export default function Home({ posts }: HomeProps) {
+export default function Home() {
+  const {
+    data: posts,
+    error,
+    isLoading,
+  } = useSWR("/api/listPosts", fetcher, config);
+
   return (
     <BasicPage>
       <Stack
@@ -25,20 +37,9 @@ export default function Home({ posts }: HomeProps) {
         px={3}
       >
         <LeftSection />
-        <CenterSection posts={posts} />
+        <CenterSection posts={posts} error={error} isLoading={isLoading} />
         <RightSection />
       </Stack>
     </BasicPage>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await fetch(
-    "https://yuchi-forum-backend.fly.dev/api/post?limit=5"
-  );
-  const posts = await res.json();
-
-  return {
-    props: { posts },
-  };
-};
