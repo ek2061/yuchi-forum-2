@@ -1,4 +1,4 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, HStack } from "@chakra-ui/react";
 import Head from "next/head";
 import { Header } from "./Header";
 
@@ -28,9 +28,9 @@ export const BasicPage = ({ title, children }: BasicPageProps) => {
 
       <main className="py-6">
         <Header />
-        <Stack direction="row" align="start" justify="center" h="full" w="full">
+        <HStack align="start" justify="center" h="full" w="full">
           {children}
-        </Stack>
+        </HStack>
       </main>
     </Box>
   );

@@ -3,7 +3,7 @@ import CenterSection from "@/components/CenterSection";
 import LeftSection from "@/components/LeftSection";
 import RightSection from "@/components/RightSection";
 import { PostAbstractType } from "@/types/posts";
-import { Stack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import type { SWRConfiguration } from "swr";
 import useSWR from "swr";
 
@@ -28,18 +28,11 @@ export default function Home() {
 
   return (
     <BasicPage>
-      <Stack
-        direction="row"
-        align="start"
-        justifyContent="center"
-        w="full"
-        mx="auto"
-        px={3}
-      >
+      <HStack align="start" justifyContent="center" w="full" mx="auto" px={3}>
         <LeftSection />
         <CenterSection posts={posts} error={error} isLoading={isLoading} />
         <RightSection />
-      </Stack>
+      </HStack>
     </BasicPage>
   );
 }
