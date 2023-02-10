@@ -1,8 +1,8 @@
+import { PostAbstract } from "@/components/PostAbstract";
+import { PostSkeleton } from "@/components/PostSkeleton";
 import { PostAbstractType } from "@/types/posts";
 import { Heading, Stack } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { PostAbstract } from "./PostAbstract";
-import { PostSkeleton } from "./PostSkeleton";
 
 interface CenterSectionProps {
   posts: PostAbstractType[] | undefined;
@@ -16,7 +16,11 @@ const Container = ({ children }: { children?: ReactNode }) => (
   </Stack>
 );
 
-function CenterSection({ posts, error, isLoading }: CenterSectionProps) {
+export const CenterSection = ({
+  posts,
+  error,
+  isLoading,
+}: CenterSectionProps) => {
   if (error) return <Container>Fetch Error</Container>;
 
   if (isLoading)
@@ -44,6 +48,4 @@ function CenterSection({ posts, error, isLoading }: CenterSectionProps) {
       </Container>
     );
   return <Container></Container>;
-}
-
-export default CenterSection;
+};

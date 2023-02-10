@@ -1,8 +1,6 @@
 import { BasicPage } from "@/components/BasicPage";
-import CenterSection from "@/components/CenterSection";
-import LeftSection from "@/components/LeftSection";
-import RightSection from "@/components/RightSection";
 import { PostAbstractType } from "@/types/posts";
+import { CenterSection, LeftSection, RightSection } from "@/views/Home";
 import { HStack } from "@chakra-ui/react";
 import type { SWRConfiguration } from "swr";
 import useSWR from "swr";

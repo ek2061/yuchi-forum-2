@@ -1,11 +1,9 @@
 import { Box } from "@chakra-ui/react";
 
-function RightSection() {
+export const RightSection = () => {
   return (
     <Box background="blue.100" display={{ base: "none", lg: "block" }}>
       RightSection
     </Box>
   );
-}
-
-export default RightSection;
+};
