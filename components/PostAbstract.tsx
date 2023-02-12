@@ -10,11 +10,7 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-import {
-  ChatBubbleLeftEllipsisIcon,
-  HandThumbDownIcon,
-  HandThumbUpIcon,
-} from "@heroicons/react/24/solid";
+import { HandThumbDownIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 const textEllipsis = {
@@ -30,12 +26,11 @@ const textEllipsis = {
 export const PostAbstract = ({
   pid,
   nickname,
-  createdat,
+  createdAt,
   title,
   excerpt,
   like,
   dislike,
-  comment,
 }: PostAbstractType) => {
   return (
     <Card width="full" shadow="md">
@@ -46,7 +41,7 @@ export const PostAbstract = ({
 
             <Box>
               <Heading size="sm">{nickname}</Heading>
-              <Text>{createdat}</Text>
+              <Text>{createdAt}</Text>
             </Box>
           </Flex>
         </Flex>
@@ -73,11 +68,6 @@ export const PostAbstract = ({
         <Flex>
           <HandThumbDownIcon className="mr-1 h-5 w-5" />
           <Text>{dislike}</Text>
-        </Flex>
-
-        <Flex>
-          <ChatBubbleLeftEllipsisIcon className="mr-1 h-5 w-5" />
-          <Text>{comment}</Text>
         </Flex>
       </CardFooter>
     </Card>

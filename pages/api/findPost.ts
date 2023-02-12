@@ -16,10 +16,10 @@ export default async function handler(
     const { data, error } = await supabase
       .from("tb_post")
       .select(
-        "pid, uid, title, content, createdat, like, dislike, tb_user(nickname)"
+        "pid, uid, title, content, createdAt, like, dislike, tb_user(nickname)"
       )
       .eq("pid", nPid)
-      .order("createdat", { ascending: false });
+      .order("createdAt", { ascending: false });
 
     if (error)
       return res.status(GetDataError.status).json({ msg: GetDataError.msg });

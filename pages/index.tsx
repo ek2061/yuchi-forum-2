@@ -1,15 +1,13 @@
 import { BasicPage } from "@/components/BasicPage";
+import { PostAbstract } from "@/components/PostAbstract";
+import { PostSkeleton } from "@/components/PostSkeleton";
 import { PostAbstractType } from "@/types/posts";
-import { CenterSection, LeftSection, RightSection } from "@/views/Home";
-import { HStack } from "@chakra-ui/react";
+import { fetcher } from "@/utils/fetcher";
+import { LeftSection } from "@/views/LeftSection";
+import { RightSection } from "@/views/RightSection";
+import { Heading, HStack, VStack } from "@chakra-ui/react";
 import type { SWRConfiguration } from "swr";
 import useSWR from "swr";
-
-const fetcher = async () => {
-  const res = await fetch("/api/listPosts");
-  const data: PostAbstractType[] = await res.json();
-  return data;
-};
 
 const config: SWRConfiguration = {
   suspense: true,
@@ -18,19 +16,58 @@ const config: SWRConfiguration = {
 };
 
 export default function Home() {
-  const {
-    data: posts,
-    error,
-    isLoading,
-  } = useSWR("/api/listPosts", fetcher, config);
+  const path = "/api/listPosts";
+  const { data, error, isLoading } = useSWR(path, () => fetcher(path), config);
 
   return (
     <BasicPage>
       <HStack align="start" justifyContent="center" w="full" mx="auto" px={3}>
         <LeftSection />
-        <CenterSection posts={posts} error={error} isLoading={isLoading} />
+
+        <VStack spacing={3} w="full" h="full" maxW="728px">
+          <Posts data={data} error={error} isLoading={isLoading} />
+        </VStack>
+
         <RightSection />
       </HStack>
     </BasicPage>
   );
 }
+
+const Posts = ({
+  data,
+  error,
+  isLoading,
+}: {
+  data: PostAbstractType[];
+  error: any;
+  isLoading: boolean;
+}) => {
+  if (error)
+    return (
+      <Heading size="lg" textAlign="center">
+        Fetch Error
+      </Heading>
+    );
+
+  if (isLoading) return <PostSkeleton type="abstract" />;
+
+  if (!data || data?.length === 0)
+    return (
+      <Heading as="h4" size="md" textAlign="center">
+        No one has found this yet, do you want to post an article?
+      </Heading>
+    );
+
+  if (data?.length > 0) {
+    return (
+      <>
+        {data.map((post) => (
+          <PostAbstract key={post.pid} {...post} />
+        ))}
+      </>
+    );
+  }
+
+  return <></>;
+};
