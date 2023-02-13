@@ -24,14 +24,20 @@ export default async function handler(
     if (error)
       return res.status(GetDataError.status).json({ msg: GetDataError.msg });
 
-    const {
-      // @ts-ignore
-      tb_user: { nickname },
-      ...rest
-    } = data[0];
-    const new_data = { ...rest, nickname };
-    return res.status(200).json(new_data);
+    if (data?.[0]) {
+      const {
+        // @ts-ignore
+        tb_user: { nickname },
+        ...rest
+      } = data[0];
+      const new_data = { ...rest, nickname };
+
+      return res.status(200).json(new_data);
+    }
+
+    return res.status(200).json(null);
   } catch (err) {
+    console.log(err);
     return res.status(ServerError.status).json({ msg: ServerError.msg });
   }
 }
