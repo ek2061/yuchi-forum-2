@@ -19,16 +19,10 @@ import {
 import { HandThumbDownIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import type { SWRConfiguration } from "swr";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { Comment } from "./Comment";
 import { CommentCol } from "./CommentCol";
 import { CommentSkeleton } from "./CommentSkeleton";
-
-const config: SWRConfiguration = {
-  suspense: true,
-  fallbackData: [],
-  revalidateOnMount: true,
-};
 
 export const PostContent = ({
   uid,
@@ -43,7 +37,13 @@ export const PostContent = ({
   const { pid } = router.query;
 
   const path = `/api/listComments?pid=${pid}`;
-  const { data, error, isLoading } = useSWR(path, () => fetcher(path), config);
+  const global_config: SWRConfiguration = useSWRConfig();
+
+  const { data, error, isLoading } = useSWR(path, () => fetcher(path), {
+    ...global_config,
+    fallbackData: [],
+  });
+
   return (
     <Card width="full" shadow="md">
       <CardHeader>

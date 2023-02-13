@@ -7,17 +7,16 @@ import { LeftSection } from "@/views/LeftSection";
 import { RightSection } from "@/views/RightSection";
 import { Heading, HStack, VStack } from "@chakra-ui/react";
 import type { SWRConfiguration } from "swr";
-import useSWR from "swr";
-
-const config: SWRConfiguration = {
-  suspense: true,
-  fallbackData: [],
-  revalidateOnMount: true,
-};
+import useSWR, { useSWRConfig } from "swr";
 
 export default function Home() {
   const path = "/api/listPosts";
-  const { data, error, isLoading } = useSWR(path, () => fetcher(path), config);
+  const global_config: SWRConfiguration = useSWRConfig();
+
+  const { data, error, isLoading } = useSWR(path, () => fetcher(path), {
+    ...global_config,
+    fallbackData: [],
+  });
 
   return (
     <BasicPage>

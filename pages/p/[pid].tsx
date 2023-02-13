@@ -6,20 +6,19 @@ import { fetcher } from "@/utils/fetcher";
 import { Heading, HStack, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import type { SWRConfiguration } from "swr";
-import useSWR from "swr";
-
-const config: SWRConfiguration = {
-  suspense: true,
-  fallbackData: {},
-  revalidateOnMount: true,
-};
+import useSWR, { useSWRConfig } from "swr";
 
 export default function Pid() {
   const router = useRouter();
   const { pid } = router.query;
 
   const path = `/api/findPost?pid=${pid}`;
-  const { data, error, isLoading } = useSWR(path, () => fetcher(path), config);
+  const global_config: SWRConfiguration = useSWRConfig();
+
+  const { data, error, isLoading } = useSWR(path, () => fetcher(path), {
+    ...global_config,
+    fallbackData: {},
+  });
 
   return (
     <BasicPage>
