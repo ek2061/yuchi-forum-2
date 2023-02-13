@@ -39,10 +39,11 @@ export const PostContent = ({
   const path = `/api/listComments?pid=${pid}`;
   const global_config: SWRConfiguration = useSWRConfig();
 
-  const { data, error, isLoading } = useSWR(path, () => fetcher(path), {
-    ...global_config,
-    fallbackData: [],
-  });
+  const { data, error, isLoading } = useSWR(
+    pid ? path : null,
+    pid ? () => fetcher(path) : null,
+    { ...global_config, fallbackData: [] }
+  );
 
   return (
     <Card width="full" shadow="md">
