@@ -15,7 +15,6 @@ export default function Home() {
 
   const { data, error, isLoading } = useSWR(path, () => fetcher(path), {
     ...global_config,
-    fallbackData: [],
   });
 
   return (

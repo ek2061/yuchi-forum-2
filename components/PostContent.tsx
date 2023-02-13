@@ -42,7 +42,7 @@ export const PostContent = ({
   const { data, error, isLoading } = useSWR(
     pid ? path : null,
     pid ? () => fetcher(path) : null,
-    { ...global_config, fallbackData: [] }
+    { ...global_config }
   );
 
   return (

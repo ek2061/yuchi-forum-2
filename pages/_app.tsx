@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
         value={{
           suspense: true,
           revalidateOnMount: true,
+          fallbackData: null,
         }}
       >
         <Component {...pageProps} />
