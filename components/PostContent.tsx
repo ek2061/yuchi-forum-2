@@ -16,7 +16,11 @@ import {
   Tooltip,
   VStack,
 } from "@chakra-ui/react";
-import { HandThumbDownIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowLeftIcon,
+  HandThumbDownIcon,
+  HandThumbUpIcon,
+} from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import type { SWRConfiguration } from "swr";
 import useSWR, { useSWRConfig } from "swr";
@@ -47,6 +51,31 @@ export const PostContent = ({
 
   return (
     <Card width="full" shadow="md">
+      <Box
+        h={12}
+        w="full"
+        px={3}
+        py={2}
+        position="sticky"
+        top="48px"
+        zIndex={100}
+        bg="white"
+        borderTopRadius={6}
+        boxShadow="sm"
+      >
+        <HStack minH={8} alignSelf="center" spacing={6}>
+          <Tooltip label="back">
+            <ArrowLeftIcon
+              className="h-9 w-9 rounded-full p-2 hover:bg-gray-200"
+              onClick={() => router.push("/")}
+            />
+          </Tooltip>
+          <Heading fontSize="lg" alignSelf="center">
+            Post
+          </Heading>
+        </HStack>
+      </Box>
+
       <CardHeader>
         <Flex>
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
