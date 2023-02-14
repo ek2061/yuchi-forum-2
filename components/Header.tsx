@@ -44,7 +44,7 @@ export const Header = () => {
           _active={{ bg: "blue.600", color: "gray.100" }}
           h={8}
         >
-          Login
+          <Link href="/login">Login</Link>
         </Button>
       </Box>
     </header>

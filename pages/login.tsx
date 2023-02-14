@@ -1,20 +1,33 @@
 import { Header } from "@/components/Header";
+import { useAppSelector } from "@/hooks/redux";
+import { setAccount, setPassword, togglePwdVis } from "@/store/login.slice";
 import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   Heading,
   HStack,
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { LockClosedIcon, UserIcon } from "@heroicons/react/24/solid";
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  LockClosedIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
 import Head from "next/head";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const { form, error, pwdVis } = useAppSelector((state) => state.login);
+
   return (
     <Box w="full" mx="auto" px="0.75rem" py="1.5rem">
       <Head>
@@ -44,32 +57,53 @@ export default function Login() {
           Join the hot topic and have fun!
         </Heading>
 
-        <FormControl isRequired>
-          <InputGroup mt={4}>
+        <FormControl isInvalid={Boolean(error.account)}>
+          <InputGroup mt={5}>
             <InputLeftElement pointerEvents="none" insetY={0.5}>
               <UserIcon className="h-5 w-5" />
             </InputLeftElement>
             <Input
+              value={form.account}
+              onChange={(e) => dispatch(setAccount(e.target.value))}
               type="text"
               placeholder="account"
               fontSize={18}
               variant="filled"
             />
           </InputGroup>
+          {error.account && (
+            <FormErrorMessage position="absolute" mt="2px" pl={3}>
+              {error.account}
+            </FormErrorMessage>
+          )}
         </FormControl>
 
-        <FormControl isRequired>
-          <InputGroup mt={4}>
+        <FormControl isInvalid={Boolean(error.password)}>
+          <InputGroup mt={5}>
             <InputLeftElement pointerEvents="none" insetY={0.5}>
               <LockClosedIcon className="h-5 w-5" />
             </InputLeftElement>
             <Input
-              type="password"
+              value={form.password}
+              onChange={(e) => dispatch(setPassword(e.target.value))}
+              type={pwdVis ? "text" : "password"}
               placeholder="password"
               fontSize={18}
               variant="filled"
             />
+            <InputRightElement onClick={() => dispatch(togglePwdVis())}>
+              {pwdVis ? (
+                <EyeSlashIcon className="h-5 w-5" />
+              ) : (
+                <EyeIcon className="h-5 w-5" />
+              )}
+            </InputRightElement>
           </InputGroup>
+          {error.password && (
+            <FormErrorMessage position="absolute" mt="2px" pl={3}>
+              {error.password}
+            </FormErrorMessage>
+          )}
         </FormControl>
 
         <VStack align="end" w="full">
@@ -89,7 +123,7 @@ export default function Login() {
         </Button>
 
         <HStack align="center" w="full">
-          <Text>Need an account?</Text>
+          <Text userSelect="none">Need an account?</Text>
           <Button color="blue.300" bg="white" p={1}>
             Register
           </Button>
