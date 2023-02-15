@@ -66,18 +66,27 @@ export interface Database {
       };
       tb_user: {
         Row: {
+          email: string | null;
+          image: string | null;
           nickname: string | null;
           password: string | null;
+          provider: string;
           uid: string;
         };
         Insert: {
+          email?: string | null;
+          image?: string | null;
           nickname?: string | null;
           password?: string | null;
+          provider?: string;
           uid: string;
         };
         Update: {
+          email?: string | null;
+          image?: string | null;
           nickname?: string | null;
           password?: string | null;
+          provider?: string;
           uid?: string;
         };
       };

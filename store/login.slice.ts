@@ -7,7 +7,7 @@ interface StateType {
 }
 
 const initialState: StateType = {
-  form: { account: "", password: "" },
+  form: { account: "jackey0517", password: "yuchi123" },
   error: { account: "", password: "" },
   pwdVis: false,
 };

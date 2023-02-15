@@ -4,6 +4,7 @@ import { setAccount, setPassword, togglePwdVis } from "@/store/login.slice";
 import {
   Box,
   Button,
+  Divider,
   FormControl,
   FormErrorMessage,
   Heading,
@@ -13,6 +14,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import {
@@ -21,12 +23,34 @@ import {
   LockClosedIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
+import { signIn, SignInResponse } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
 export default function Login() {
   const dispatch = useDispatch();
   const { form, error, pwdVis } = useAppSelector((state) => state.login);
+
+  const router = useRouter();
+  const toast = useToast();
+
+  const handleLogin = async () => {
+    const res: SignInResponse | undefined = await signIn<"credentials">(
+      "credentials",
+      { redirect: false, ...form }
+    );
+    if (res?.ok) {
+      router.push("/");
+    } else {
+      // !fix it: use ChakraProvider
+      toast({
+        description: "login error",
+        status: "error",
+        duration: 3000,
+      });
+    }
+  };
 
   return (
     <Box w="full" mx="auto" px="0.75rem" py="1.5rem">
@@ -56,7 +80,6 @@ export default function Login() {
         <Heading size="md" fontWeight="normal">
           Join the hot topic and have fun!
         </Heading>
-
         <FormControl isInvalid={Boolean(error.account)}>
           <InputGroup mt={5}>
             <InputLeftElement pointerEvents="none" insetY={0.5}>
@@ -77,7 +100,6 @@ export default function Login() {
             </FormErrorMessage>
           )}
         </FormControl>
-
         <FormControl isInvalid={Boolean(error.password)}>
           <InputGroup mt={5}>
             <InputLeftElement pointerEvents="none" insetY={0.5}>
@@ -105,23 +127,33 @@ export default function Login() {
             </FormErrorMessage>
           )}
         </FormControl>
-
         <VStack align="end" w="full">
           <Button color="blue.300" bg="white" p={1}>
             Forgot password?
           </Button>
         </VStack>
-
+        <Button
+          w="full"
+          bg="green.400"
+          _hover={{ bg: "blue.500" }}
+          _active={{ bg: "blue.600" }}
+          color="white"
+          onClick={handleLogin}
+        >
+          Login
+        </Button>
+        <Divider />
+        <Text>Or</Text>
         <Button
           w="full"
           bg="blue.400"
           _hover={{ bg: "blue.500" }}
           _active={{ bg: "blue.600" }}
           color="white"
+          onClick={() => signIn("google", { callbackUrl: "/" })}
         >
-          Login
+          Continue with Google
         </Button>
-
         <HStack align="center" w="full">
           <Text userSelect="none">Need an account?</Text>
           <Button color="blue.300" bg="white" p={1}>
