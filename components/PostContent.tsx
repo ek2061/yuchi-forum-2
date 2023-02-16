@@ -77,19 +77,17 @@ export const PostContent = ({
       </Box>
 
       <CardHeader>
-        <Flex>
-          <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Avatar name={nickname} />
+        <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+          <Avatar name={nickname} />
 
-            <Box>
-              <Tooltip label={uid} placement="top-start">
-                <Heading size="sm">{nickname}</Heading>
-              </Tooltip>
-              <Text color="GrayText" fontSize="sm">
-                {createdAt}
-              </Text>
-            </Box>
-          </Flex>
+          <Box>
+            <Tooltip label={uid} placement="top-start">
+              <Heading size="sm">{nickname}</Heading>
+            </Tooltip>
+            <Text color="GrayText" fontSize="sm">
+              {createdAt}
+            </Text>
+          </Box>
         </Flex>
       </CardHeader>
 
@@ -98,7 +96,9 @@ export const PostContent = ({
           <Heading size="lg" alignSelf="start">
             {title}
           </Heading>
-          <Text fontSize="lg">{content}</Text>
+          <Text fontSize="lg" whiteSpace="pre-line">
+            {content}
+          </Text>
         </VStack>
       </CardBody>
 
@@ -125,7 +125,7 @@ export const PostContent = ({
 
       <CommentCol />
 
-      <Divider mx={5} mb={4} w="auto" borderBottomColor="gray.400" />
+      <Divider mx={5} w="auto" borderBottomColor="gray.400" />
 
       <CardBody>
         <Comments data={data} error={error} isLoading={isLoading} />
