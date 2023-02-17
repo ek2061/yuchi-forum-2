@@ -135,8 +135,8 @@ export default function Login() {
         <Button
           w="full"
           bg="green.400"
-          _hover={{ bg: "blue.500" }}
-          _active={{ bg: "blue.600" }}
+          _hover={{ bg: "green.500" }}
+          _active={{ bg: "green.600" }}
           color="white"
           onClick={handleLogin}
         >
