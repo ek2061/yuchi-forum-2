@@ -102,10 +102,8 @@ export const PostContent = ({
       </CardHeader>
 
       <CardBody px={7} py={0}>
-        <VStack>
-          <Heading size="lg" alignSelf="start">
-            {title}
-          </Heading>
+        <VStack align="start">
+          <Heading size="lg">{title}</Heading>
           <Text fontSize="lg" whiteSpace="pre-line">
             {content}
           </Text>
