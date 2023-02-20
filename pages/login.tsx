@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { setAccount, setPassword, togglePwdVis } from "@/store/login.slice";
 import {
   Box,
@@ -26,10 +26,9 @@ import {
 import { signIn, SignInResponse } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 
 export default function Login() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { form, error, pwdVis } = useAppSelector((state) => state.login);
 
   const router = useRouter();

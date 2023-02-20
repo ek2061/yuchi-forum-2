@@ -4,12 +4,14 @@ interface StateType {
   form: { account: string; password: string };
   error: { account: string; password: string };
   pwdVis: boolean;
+  modalVis: boolean;
 }
 
 const initialState: StateType = {
-  form: { account: "jackey0517", password: "yuchi123" },
+  form: { account: "", password: "" },
   error: { account: "", password: "" },
   pwdVis: false,
+  modalVis: false,
 };
 
 export const loginSlice = createSlice({
@@ -39,12 +41,25 @@ export const loginSlice = createSlice({
     resetForm: (state) => {
       state.form = initialState.form;
       state.error = initialState.error;
+      state.modalVis = initialState.modalVis;
     },
     togglePwdVis: (state) => {
       state.pwdVis = !state.pwdVis;
     },
+    openModal: (state) => {
+      state.modalVis = true;
+    },
+    closeModal: (state) => {
+      state.modalVis = false;
+    },
   },
 });
 
-export const { setAccount, setPassword, resetForm, togglePwdVis } =
-  loginSlice.actions;
+export const {
+  setAccount,
+  setPassword,
+  resetForm,
+  togglePwdVis,
+  openModal,
+  closeModal,
+} = loginSlice.actions;

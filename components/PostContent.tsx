@@ -1,5 +1,8 @@
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { closeModal } from "@/store/login.slice";
 import { CommentType, PostContentType } from "@/types/posts";
 import { fetcher } from "@/utils/fetcher";
+import { LoginModal } from "@/views/LoginModal";
 import {
   Avatar,
   Box,
@@ -21,11 +24,12 @@ import {
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/solid";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import type { SWRConfiguration } from "swr";
 import useSWR, { useSWRConfig } from "swr";
 import { Comment } from "./Comment";
-import { CommentCol } from "./CommentCol";
+import { CommentCol, MustBeLoggedIn } from "./CommentCol";
 import { CommentSkeleton } from "./CommentSkeleton";
 
 export const PostContent = ({
@@ -48,6 +52,12 @@ export const PostContent = ({
     pid ? () => fetcher(path) : null,
     { ...global_config }
   );
+
+  const { data: session } = useSession();
+
+  const dispatch = useAppDispatch();
+  const onCloseLoginModal = () => dispatch(closeModal());
+  const { modalVis } = useAppSelector((state) => state.login);
 
   return (
     <Card width="full" shadow="md">
@@ -123,13 +133,15 @@ export const PostContent = ({
 
       <Divider mx={5} w="auto" borderBottomColor="gray.400" />
 
-      <CommentCol />
+      {session ? <CommentCol /> : <MustBeLoggedIn />}
 
       <Divider mx={5} w="auto" borderBottomColor="gray.400" />
 
       <CardBody>
         <Comments data={data} error={error} isLoading={isLoading} />
       </CardBody>
+
+      {modalVis && <LoginModal isOpen={modalVis} onClose={onCloseLoginModal} />}
     </Card>
   );
 };
