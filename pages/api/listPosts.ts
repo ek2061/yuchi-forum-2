@@ -6,11 +6,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { limit = "10" } = req.query;
-  const nLimit = parseInt(limit as string);
+  const { page = "1" } = req.query;
+  const nPage = parseInt(page as string);
 
-  if (isNaN(nLimit))
+  if (isNaN(nPage) || nPage <= 0)
     return res.status(InfoError.status).json({ msg: InfoError.msg });
+  const per = 7;
+  const startIndex = (nPage - 1) * per;
+  const endIndex = nPage * per - 1;
 
   try {
     const { data, error } = await supabase
@@ -18,7 +21,7 @@ export default async function handler(
       .select(
         "pid, uid, title, excerpt, createdAt, like, dislike, tb_user(nickname)"
       )
-      .limit(nLimit)
+      .range(startIndex, endIndex)
       .order("createdAt", { ascending: false });
 
     if (error)
