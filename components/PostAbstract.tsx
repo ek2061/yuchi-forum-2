@@ -48,7 +48,7 @@ export const PostAbstract = ({
       </CardHeader>
 
       <CardBody py={0}>
-        <Heading size="md" mb={0.5} sx={textEllipsis}>
+        <Heading size="md" lineHeight={7} sx={textEllipsis}>
           <Link
             href={`/p/${pid}`}
             className="text-blue-500 hover:text-blue-400"
