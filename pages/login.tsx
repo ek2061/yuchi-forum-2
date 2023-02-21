@@ -35,6 +35,8 @@ export default function Login() {
   const toast = useToast();
 
   const handleLogin = async () => {
+    if (!form.account || !form.password) return;
+
     const res: SignInResponse | undefined = await signIn<"credentials">(
       "credentials",
       { redirect: false, ...form }
