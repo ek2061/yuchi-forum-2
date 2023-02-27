@@ -1,22 +1,16 @@
+import { AllBoardsCard } from "@/components/AllBoardsCard";
 import { AllBoardsSkeleton } from "@/components/AllBoardsSkeleton";
 import { BasicPage } from "@/components/BasicPage";
 import { HotBoardType } from "@/types/hotboard";
 import { fetcher } from "@/utils/fetcher";
 import {
-  Box,
-  Button,
   Card,
   CardBody,
   CardHeader,
-  Flex,
   Heading,
-  HStack,
   Stack,
   StackDivider,
-  Text,
 } from "@chakra-ui/react";
-import { FireIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
 import type { SWRConfiguration } from "swr";
 import useSWR, { useSWRConfig } from "swr";
 
@@ -79,39 +73,4 @@ const Boards = ({
   }
 
   return <></>;
-};
-
-const AllBoardsCard = ({ name, volume }: HotBoardType) => {
-  return (
-    <Box>
-      <HStack justifyContent="space-between">
-        <Link href={`/b/${name}`}>
-          <Heading
-            size="md"
-            textTransform="uppercase"
-            color="blue.300"
-            _hover={{ color: "blue.400" }}
-          >
-            {name}
-          </Heading>
-        </Link>
-
-        <HStack>
-          <Flex align="center">
-            <FireIcon className="h-4 w-4" />
-            <Text>{volume}</Text>
-          </Flex>
-
-          <Button
-            bg="green.300"
-            color="white"
-            _hover={{ bg: "green.400" }}
-            _active={{ bg: "green.500" }}
-          >
-            Follow
-          </Button>
-        </HStack>
-      </HStack>
-    </Box>
-  );
 };
