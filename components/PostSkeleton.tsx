@@ -16,7 +16,7 @@ import { HandThumbDownIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
 
 export const PostSkeleton = ({ type }: { type: "abstract" | "content" }) => {
   return (
-    <Card width="full" shadow="md">
+    <Card w="full" shadow="md">
       <CardHeader>
         <Flex>
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">

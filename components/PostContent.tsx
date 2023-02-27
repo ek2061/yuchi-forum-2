@@ -60,7 +60,7 @@ export const PostContent = ({
   const { modalVis } = useAppSelector((state) => state.login);
 
   return (
-    <Card width="full" shadow="md">
+    <Card w="full" shadow="md">
       <Box
         h={12}
         w="full"

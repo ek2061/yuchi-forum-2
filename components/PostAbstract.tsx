@@ -38,7 +38,7 @@ export const PostAbstract = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     return (
-      <Card width="full" shadow="md" ref={ref}>
+      <Card w="full" shadow="md" ref={ref}>
         <CardHeader>
           <Flex>
             <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
