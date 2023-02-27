@@ -3,9 +3,7 @@ import { PostAbstract } from "@/components/PostAbstract";
 import { PostSkeleton } from "@/components/PostSkeleton";
 import { PostAbstractType } from "@/types/posts";
 import { fetcher } from "@/utils/fetcher";
-import { LeftSection } from "@/views/LeftSection";
-import { RightSection } from "@/views/RightSection";
-import { Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import type { SWRConfiguration } from "swr";
 import useSWR, { useSWRConfig } from "swr";
@@ -56,21 +54,13 @@ export default function Home() {
 
   return (
     <BasicPage>
-      <HStack align="start" justifyContent="center" w="full" mx="auto" px={3}>
-        <LeftSection />
-
-        <VStack spacing={3} w="full" maxW="728px">
-          <Posts
-            posts={posts}
-            error={error}
-            isLoading={isLoading}
-            lastItemRef={lastItemRef}
-            hasMore={hasMore}
-          />
-        </VStack>
-
-        <RightSection />
-      </HStack>
+      <Posts
+        posts={posts}
+        error={error}
+        isLoading={isLoading}
+        lastItemRef={lastItemRef}
+        hasMore={hasMore}
+      />
     </BasicPage>
   );
 }

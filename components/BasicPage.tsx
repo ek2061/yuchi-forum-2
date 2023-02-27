@@ -1,4 +1,6 @@
-import { Box, HStack } from "@chakra-ui/react";
+import { LeftSection } from "@/views/LeftSection";
+import { RightSection } from "@/views/RightSection";
+import { Box, HStack, VStack } from "@chakra-ui/react";
 import Head from "next/head";
 import { Header } from "./Header";
 
@@ -28,8 +30,12 @@ export const BasicPage = ({ title, children }: BasicPageProps) => {
 
       <main className="py-6">
         <Header />
-        <HStack align="start" justify="center" h="full" w="full">
-          {children}
+        <HStack align="start" justifyContent="center" w="full" mx="auto" px={3}>
+          <LeftSection />
+          <VStack spacing={3} w="full" maxW="728px">
+            {children}
+          </VStack>
+          <RightSection />
         </HStack>
       </main>
     </Box>

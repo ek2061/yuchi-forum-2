@@ -3,7 +3,7 @@ import { PostContent } from "@/components/PostContent";
 import { PostSkeleton } from "@/components/PostSkeleton";
 import { PostContentType } from "@/types/posts";
 import { fetcher } from "@/utils/fetcher";
-import { Heading, HStack, VStack } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import type { SWRConfiguration } from "swr";
 import useSWR, { useSWRConfig } from "swr";
@@ -23,11 +23,7 @@ export default function Pid() {
 
   return (
     <BasicPage>
-      <HStack align="start" justifyContent="center" w="full" mx="auto" px={3}>
-        <VStack spacing={3} w="full" h="full" maxW="996px">
-          <Post data={data} error={error} isLoading={isLoading} />
-        </VStack>
-      </HStack>
+      <Post data={data} error={error} isLoading={isLoading} />
     </BasicPage>
   );
 }

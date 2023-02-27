@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { page = "1" } = req.query;
+  const { page = "1", bid = "all" } = req.query;
   const nPage = parseInt(page as string);
 
   if (isNaN(nPage) || nPage <= 0)
