@@ -32,6 +32,7 @@ export const LeftSection = () => {
         <Text fontSize="sm" px={2} color="gray.400" fontWeight="bold">
           FEEDS
         </Text>
+        <LinkItem title="Home" href="/" />
         <LinkItem title="All Boards" href="/b/all" />
         <LinkItem title="Hot Boards" href="/b/hot" />
 
