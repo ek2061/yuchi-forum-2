@@ -25,6 +25,7 @@ export const BasicPage = ({ title, children }: BasicPageProps) => {
           content={`${process.env.NEXT_PUBLIC_BASE_URL}/yuchi-forum-logo.png`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="廢文製造機" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
