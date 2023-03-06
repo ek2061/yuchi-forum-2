@@ -23,6 +23,7 @@ import {
   LockClosedIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
+import type { GetStaticProps } from "next";
 import { signIn, SignInResponse } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -165,3 +166,9 @@ export default function Login() {
     </Box>
   );
 }
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {},
+  };
+};
