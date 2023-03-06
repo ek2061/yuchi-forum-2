@@ -29,14 +29,14 @@ export const LeftSection = () => {
       minW={208}
     >
       <VStack align="stretch" my={2} px={2} w="full">
-        <Text fontSize="sm" px={2} color="gray.400" fontWeight="bold">
+        <Text fontSize="sm" px={2} color="gray.500" fontWeight="bold">
           FEEDS
         </Text>
         <LinkItem title="Home" href="/" />
         <LinkItem title="All Boards" href="/b/all" />
         <LinkItem title="Hot Boards" href="/b/hot" />
 
-        <Text fontSize="sm" px={2} color="gray.400" fontWeight="bold">
+        <Text fontSize="sm" px={2} color="gray.500" fontWeight="bold">
           RECOMMEND
         </Text>
         <Recommend data={data} error={error} isLoading={isLoading} />
