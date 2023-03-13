@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { page = "1", bid = "all" } = req.query;
+  const { page = "1", bid } = req.query;
   const nPage = parseInt(page as string);
 
   if (isNaN(nPage) || nPage <= 0)
@@ -16,18 +16,26 @@ export default async function handler(
   const endIndex = nPage * per - 1;
 
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from("tb_post")
       .select(
-        "pid, uid, title, excerpt, createdAt, like, dislike, tb_user(nickname)"
+        "pid, uid, title, excerpt, createdAt, like, dislike, tb_user(nickname), bid"
       )
       .range(startIndex, endIndex)
       .order("createdAt", { ascending: false });
 
+    let { data, error } = await query;
+
+    if (bid) {
+      let { data: d, error: e } = await query.eq("bid", bid);
+      data = d;
+      error = e;
+    }
+
     if (error)
       return res.status(GetDataError.status).json({ msg: GetDataError.msg });
 
-    if (data?.length > 0) {
+    if (data && data?.length > 0) {
       const new_data = data?.map((d) => {
         const {
           // @ts-ignore
