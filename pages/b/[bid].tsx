@@ -3,7 +3,8 @@ import { PostAbstract } from "@/components/PostAbstract";
 import { PostSkeleton } from "@/components/PostSkeleton";
 import { PostAbstractType } from "@/types/posts";
 import { fetcher } from "@/utils/fetcher";
-import { Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, HStack, Text, Tooltip } from "@chakra-ui/react";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import React from "react";
 import type { SWRConfiguration } from "swr";
@@ -66,7 +67,31 @@ export default function Bid() {
   );
 
   return (
-    <BasicPage>
+    <BasicPage title={`${bid} board`}>
+      <Box
+        h={12}
+        w="full"
+        px={3}
+        py={2}
+        position="sticky"
+        top="48px"
+        zIndex={100}
+        bg="white"
+        borderTopRadius={6}
+        boxShadow="sm"
+      >
+        <HStack minH={8} alignSelf="center" spacing={6}>
+          <Tooltip label="back">
+            <ArrowLeftIcon
+              className="h-9 w-9 rounded-full p-2 hover:bg-gray-200"
+              onClick={() => router.push("/b/all")}
+            />
+          </Tooltip>
+          <Heading fontSize="lg" alignSelf="center">
+            {bid}
+          </Heading>
+        </HStack>
+      </Box>
       <Posts
         posts={posts}
         error={error}

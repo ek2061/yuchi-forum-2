@@ -23,7 +23,7 @@ export default function AllBoard() {
   });
 
   return (
-    <BasicPage>
+    <BasicPage title="all boards">
       <Card w="full" shadow="md">
         <CardHeader>
           <Heading size="lg">All Boards</Heading>
