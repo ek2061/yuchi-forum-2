@@ -3,11 +3,11 @@ import { Box, Button, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import { FireIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-export const AllBoardsCard = ({ name, volume }: HotBoardType) => {
+export const AllBoardsCard = ({ bid, name, volume }: HotBoardType) => {
   return (
     <Box>
       <HStack justifyContent="space-between">
-        <Link href={`/b/${name}`}>
+        <Link href={`/b/${bid}`}>
           <Heading
             size="md"
             textTransform="uppercase"
