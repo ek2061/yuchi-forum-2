@@ -1,11 +1,19 @@
 import { store } from "@/store";
 import "@/styles/globals.css";
 import theme from "@/theme";
-import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
 import { Provider } from "react-redux";
 import { SWRConfig } from "swr";
+
+const ChakraProvider = dynamic(
+  () =>
+    import("@chakra-ui/react").then((chakra) => {
+      return chakra.ChakraProvider;
+    }),
+  { ssr: false }
+);
 
 export default function App({
   Component,
